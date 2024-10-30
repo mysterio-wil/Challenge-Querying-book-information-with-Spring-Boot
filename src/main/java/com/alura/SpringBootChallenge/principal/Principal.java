@@ -1,5 +1,6 @@
 package com.alura.SpringBootChallenge.principal;
 
+import com.alura.SpringBootChallenge.model.Datos;
 import com.alura.SpringBootChallenge.service.ConsumoAPI;
 import com.alura.SpringBootChallenge.service.ConvierteDatos;
 
@@ -10,7 +11,7 @@ public class Principal {
     // Instancia de ConsumoAPI para manejar las solicitudes a la API
     private ConsumoAPI consumoAPI = new ConsumoAPI();
     // Instancia de ConvierteDatos para manejar la conversión de datos
-    private ConvierteDatos convierteDatos = new ConvierteDatos();
+    private ConvierteDatos conversor = new ConvierteDatos();
 
     // Método que muestra el menú principal de la aplicación
     public void muestraElMenu() {
@@ -18,5 +19,7 @@ public class Principal {
         var json = consumoAPI.obtenerDatos(URL_BASE);
         // Imprime el JSON obtenido en la consola
         System.out.println(json);
+        var datos = conversor.obtenerDatos(json, Datos.class);
+        System.out.println(datos);
     }
 }
