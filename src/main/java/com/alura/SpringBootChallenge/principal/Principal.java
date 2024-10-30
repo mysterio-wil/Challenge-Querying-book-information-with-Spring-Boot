@@ -6,6 +6,7 @@ import com.alura.SpringBootChallenge.service.ConsumoAPI;
 import com.alura.SpringBootChallenge.service.ConvierteDatos;
 
 import java.util.Comparator;
+import java.util.stream.IntStream;
 
 public class Principal {
     // URL base para realizar la solicitud a la API externa
@@ -27,10 +28,17 @@ public class Principal {
 
         // Top 10 libros más descargados
         System.out.println("Top 10 libros más descargados");
-        datos.resultados().stream()
-                .sorted(Comparator.comparing(DatosLibros::numeroDeDescargas).reversed())
-                .limit(10)
-                .map(l ->l.titulo().toUpperCase())
-                .forEach(System.out::println);
+        System.out.println("");
+        IntStream.range(0, 10)
+                .forEach(i -> {
+                    System.out.println((i + 1) + ". " +
+                            datos.resultados().stream()
+                                    .sorted(Comparator.comparing(DatosLibros::numeroDeDescargas).reversed())
+                                    .skip(i)
+                                    .findFirst()
+                                    .map(DatosLibros::titulo)
+                                    .map(String::toUpperCase)
+                                    .orElse("Sin datos"));
+                });
     }
 }
