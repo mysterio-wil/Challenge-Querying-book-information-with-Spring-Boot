@@ -8,7 +8,7 @@ import java.util.List;
 // Clase que representa los detalles de un libro, mapeando los campos de la API.
 // Se utiliza JsonIgnoreProperties para evitar errores al procesar campos desconocidos.
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record DatosLibros<DatosAutor>(
+public record DatosLibros(
         // Campo mapeado al título del libro en el JSON
         @JsonAlias("title") String titulo,
 
